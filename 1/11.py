@@ -4,17 +4,15 @@ import numpy as np
 img = cv2.imread('f2.jpg')
 height, width, channels = img.shape
 
-# convert image into b-w
 def black_white(img):
     bw_img = np.zeros((height, width), dtype=np.uint8)
     for i in range(height):
         for j in range(width):
             b, g, r = img[i][j]
-            gray = (int(b) + int(g) + int(r)) / 3  # Преобразование в int предотвращает переполнение
+            gray = (int(b) + int(g) + int(r)) / 3
             bw_img[i][j] = int(gray)
     return bw_img
 
-# method Otsu
 def otsu_method(bw_img):
     H = np.zeros(256)
     for i in range(height):
@@ -59,7 +57,6 @@ def otsu_method(bw_img):
 
     return t_val
 
-# create binary mask for image
 def make_mask(t, blacknwhite_img):
     for i in range(height):
         for j in range(width):
